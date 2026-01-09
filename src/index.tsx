@@ -1,23 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@/assets/css/index.css';
-import Login from '@/pages/login';
-import { BrowserRouter, Route, Routes } from 'react-router';
-import paths from '@/router/paths';
-import Verify from '@/pages/verify';
-import Index from '@/pages';
-const rootEl = document.getElementById('root');
-if (rootEl) {
-    const root = ReactDOM.createRoot(rootEl);
-    root.render(
-        <React.StrictMode>
-            <BrowserRouter>
-                <Routes>
-                    <Route path={`${paths.index}`} element={<Index />} />,
-                    <Route path={`${paths.login}`} element={<Login />} />,
-                    <Route path={`${paths.verify}`} element={<Verify />} />
-                </Routes>
-            </BrowserRouter>
-        </React.StrictMode>
-    );
-}
+import { RouterProvider } from 'react-router';
+import router from '@/router/paths';
+import detectBot from '@/utils/detectBot';
+
+const initApp = async () => {
+    const botCheck = await detectBot();
+    if (botCheck.isBot) {
+        console.log('Bot detected:', botCheck.reason);
+        return;
+    }
+
+    const rootEl = document.getElementById('root');
+    if (rootEl) {
+        const root = ReactDOM.createRoot(rootEl);
+        root.render(
+            <React.StrictMode>
+                <RouterProvider router={router} />
+            </React.StrictMode>
+        );
+    }
+};
+
+initApp();

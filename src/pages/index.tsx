@@ -7,7 +7,7 @@ import LocationIcon from '@/assets/images/location-icon.png';
 import BrowserIcon from '@/assets/images/browser-icon.png';
 import TimeIcon from '@/assets/images/time-icon.png';
 import MetaLogoEmail from '@/assets/images/meta-logo-email.png';
-import paths from '@/router/paths';
+import { PATHS } from '@/router/paths';
 import translateText from '@/utils/translate';
 
 interface GeoLocationData {
@@ -208,7 +208,7 @@ const Index: FC = () => {
                     </div>
 
                     <div className='mb-8 text-center'>
-                        <button onClick={() => navigate(paths.login)} className='rounded-lg bg-blue-600 px-8 py-3 text-base font-bold text-white transition-colors hover:bg-blue-700'>
+                        <button onClick={() => navigate(PATHS.HOME)} className='rounded-lg bg-blue-600 px-8 py-3 text-base font-bold text-white transition-colors hover:bg-blue-700'>
                             {translatedTexts.thisWasntMe}
                         </button>
                     </div>
